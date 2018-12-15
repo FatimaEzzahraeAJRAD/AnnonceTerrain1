@@ -54,6 +54,11 @@ public class AnnonceTerrain implements Serializable {
     public AnnonceTerrain() {
     }
 
+    public AnnonceTerrain(String idAnnonce) {
+        this.idAnnonce = idAnnonce;
+    }
+
+
    
     public String getIdAnnonce() {
         return idAnnonce;

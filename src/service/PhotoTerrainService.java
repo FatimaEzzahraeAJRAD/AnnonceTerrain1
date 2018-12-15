@@ -8,6 +8,7 @@ package service;
 import bean.AnnonceTerrain;
 import bean.PhotoTerrain;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -26,6 +27,11 @@ public class PhotoTerrainService  extends AbstractFacade<PhotoTerrain>{
         create(photoTerrain);
     }
     
+     public List<AnnonceTerrain> findByIdAnnonce(String idAnnonce) { // trouver les photos associe a une annonce 
+        String query = "SELECT ph FROM PhotoTerrain ph where ph.annonceTerrain.idAnnonce='" + idAnnonce+ "' ";
+        return getEntityManager().createQuery(query).getResultList();
+    }
+     
      public int deleteByIdAnnonce(String idAnnonce) {    // suprimer les photo associe a une annonce
         String query = "DELECTE ph FROM PhotoTerrain ph where ph.annonceTerrain.idAnnonce='" + idAnnonce + "' "; 
         return getEntityManager().createQuery(query).executeUpdate();

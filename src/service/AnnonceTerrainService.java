@@ -29,7 +29,7 @@ public class AnnonceTerrainService  extends AbstractFacade<AnnonceTerrain>{
 //        
 //    }
     
-     public AnnonceTerrain creeAnnonce(String idAnnonce, double surface ) {
+     public AnnonceTerrain creeAnnonce(String idAnnonce, double surface) {
         AnnonceTerrain at = new AnnonceTerrain();
         at.setIdAnnonce(idAnnonce);
         at.setSurface(surface);
@@ -37,7 +37,16 @@ public class AnnonceTerrainService  extends AbstractFacade<AnnonceTerrain>{
         create(at);
         return at;
     }
-  
+   public int clotureAnnonce(AnnonceTerrain a) {
+        if (a.isCloture() == false) {
+            return -1;
+           } 
+        else {
+            a.setCloture(false);
+            edit(a);
+            return 1;
+        }
+    }
     
      public void saveAnnonce(AnnonceTerrain annonceTerrain, List<PhotoTerrain> PhotoTerrains){ // crée une Annonce et ces photos
          create(annonceTerrain);
@@ -79,4 +88,5 @@ public class AnnonceTerrainService  extends AbstractFacade<AnnonceTerrain>{
          photoTerrainService.deleteByIdAnnonce(idAnnonce);
          remove (new AnnonceTerrain( idAnnonce ));
      }
+    
 }
