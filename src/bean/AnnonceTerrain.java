@@ -6,6 +6,7 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,11 +22,12 @@ public class AnnonceTerrain implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    private String idAnnonce ;
+    private String refAnnonce ;
     private double prix ;
-     private char description ;
+     private String description ;
     private double surface;
     private boolean cloture;
+    //private  Date date;
     private double prixDeVente ;
     @ManyToOne
     private  Quartier  quartier;
@@ -38,8 +40,8 @@ public class AnnonceTerrain implements Serializable {
 
    
 
-    public AnnonceTerrain(String idAnnonce, double prix, char description, double surface, boolean cloture, double prixDeVente, Quartier quartier, TypeTerrain type, User user, List<PhotoTerrain> photoTerrains) {
-        this.idAnnonce = idAnnonce;
+    public AnnonceTerrain(String refAnnonce, double prix, String description, double surface, boolean cloture, double prixDeVente, Quartier quartier, TypeTerrain type, User user, List<PhotoTerrain> photoTerrains) {
+        this.refAnnonce = refAnnonce;
         this.prix = prix;
         this.description = description;
         this.surface = surface;
@@ -49,23 +51,24 @@ public class AnnonceTerrain implements Serializable {
         this.typeTerrain = typeTerrain;
         this.user = user;
         this.photoTerrains = photoTerrains;
+        //this.date=date;
     }
 
     public AnnonceTerrain() {
     }
 
-    public AnnonceTerrain(String idAnnonce) {
-        this.idAnnonce = idAnnonce;
+    public AnnonceTerrain(String refAnnonce) {
+        this.refAnnonce = refAnnonce;
     }
 
 
    
-    public String getIdAnnonce() {
-        return idAnnonce;
+    public String getRefAnnonce() {
+        return refAnnonce;
     }
 
-    public void setIdAnnonce(String idAnnonce) {
-        this.idAnnonce = idAnnonce;
+    public void setRefAnnonce(String refAnnonce) {
+        this.refAnnonce = refAnnonce;
     }
 
     public double getPrix() {
@@ -76,11 +79,11 @@ public class AnnonceTerrain implements Serializable {
         this.prix = prix;
     }
 
-    public char getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(char description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -109,6 +112,9 @@ public class AnnonceTerrain implements Serializable {
     }
 
     public Quartier getQuartier() {
+        if(quartier==null){
+             quartier= new Quartier();
+        }
         return quartier;
     }
 
@@ -117,6 +123,9 @@ public class AnnonceTerrain implements Serializable {
     }
 
     public TypeTerrain getTypeTerrain() {
+        if(typeTerrain==null){
+            typeTerrain= new TypeTerrain();
+        }
         return typeTerrain;
     }
 
@@ -127,6 +136,9 @@ public class AnnonceTerrain implements Serializable {
    
 
     public User getUser() {
+        if(user==null){
+            user= new User();
+        }
         return user;
     }
 
@@ -141,12 +153,20 @@ public class AnnonceTerrain implements Serializable {
     public void setPhotoTerrains(List<PhotoTerrain> photoTerrains) {
         this.photoTerrains = photoTerrains;
     }
-    
+
+//    public Date getDate() {
+//        return date;
+//    }
+//
+//    public void setDate(Date date) {
+//        this.date = date;
+//    }
+//    
   
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idAnnonce != null ? idAnnonce.hashCode() : 0);
+        hash += (refAnnonce != null ? refAnnonce.hashCode() : 0);
         return hash;
     }
 
@@ -157,7 +177,7 @@ public class AnnonceTerrain implements Serializable {
             return false;
         }
         AnnonceTerrain other = (AnnonceTerrain) object;
-        if ((this.idAnnonce == null && other.idAnnonce != null) || (this.idAnnonce != null && !this.idAnnonce.equals(other.idAnnonce))) {
+        if ((this.refAnnonce == null && other.refAnnonce != null) || (this.refAnnonce != null && !this.refAnnonce.equals(other.refAnnonce))) {
             return false;
         }
         return true;
@@ -165,7 +185,7 @@ public class AnnonceTerrain implements Serializable {
 
     @Override
     public String toString() {
-        return "AnnonceTerrain{" + "idAnnonce=" + idAnnonce + ", prix=" + prix + ", description=" + description + ", surface=" + surface + ", cloture=" + cloture + ", prixDeVente=" + prixDeVente + ", quartier=" + quartier + ", type=" + typeTerrain + ", user=" + user + ", photoTerrains=" + photoTerrains + '}';
+        return "AnnonceTerrain{" + "idAnnonce=" + refAnnonce + ", prix=" + prix + ", description=" + description + ", surface=" + surface + ", cloture=" + cloture + ", prixDeVente=" + prixDeVente + ", quartier=" + quartier + ", type=" + typeTerrain + ", user=" + user + ", photoTerrains=" + photoTerrains + '}';
     }
 
 

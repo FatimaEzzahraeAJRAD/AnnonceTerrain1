@@ -23,11 +23,9 @@ public class User implements Serializable {
     private String login;
     private String password;
     private boolean bloque;
- private int nombreCnxRestant;
 
     public User(boolean bloque, int nombreCnxRestant) {
         this.bloque = bloque;
-        this.nombreCnxRestant = nombreCnxRestant;
     }
 
    
@@ -63,15 +61,6 @@ public class User implements Serializable {
         this.bloque = bloque;
     }
 
-   
-
-    public int getNombreCnxRestant() {
-        return nombreCnxRestant;
-    }
-
-    public void setNombreCnxRestant(int nombreCnxRestant) {
-        this.nombreCnxRestant = nombreCnxRestant;
-    }
     
     @Override
     public int hashCode() {
@@ -95,7 +84,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "login=" + login + ", password=" + password + ", bloque=" + bloque + ", nombreCnxRestant=" + nombreCnxRestant + '}';
+        return "User{" + "login=" + login + ", password=" + password + ", bloque=" + bloque + '}';
     }
 
    

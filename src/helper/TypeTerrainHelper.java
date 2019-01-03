@@ -5,9 +5,9 @@
  */
 package helper;
 
-import bean.AnnonceTerrain;
 import bean.Quartier;
 import bean.TypeTerrain;
+import bean.Ville;
 import java.util.List;
 import javax.swing.JTable;
 
@@ -15,29 +15,27 @@ import javax.swing.JTable;
  *
  * @author Chaimaa-abd
  */
-public class AnnonceTerrainHelper extends AbstractHelper<AnnonceTerrain> {
+public class TypeTerrainHelper extends AbstractHelper<TypeTerrain> {
     
      private static AbstractHelperItem[] titres;
 
     static {
         titres = new AbstractHelperItem[]{
             
-            new AbstractHelperItem("REFANNONCE  ", "refAnnonce"),
-            new AbstractHelperItem("SURFACE", "surface"),
-           new AbstractHelperItem("QUARTIER", "quartier"),
-            new AbstractHelperItem("TYPETERRAIN", "typeTerrain")};
+            new AbstractHelperItem("IdType", "IdType"),
+            new AbstractHelperItem("LIBELLE", "libbele")};
             
            // new AbstractHelperItem("Identifiant", "id"),};
     }
 
-    public AnnonceTerrainHelper( JTable jTable, List<AnnonceTerrain> list) {
+    public TypeTerrainHelper( JTable jTable, List<TypeTerrain> list) {
         super(titres, jTable, list);
     }
-     public AnnonceTerrainHelper(AbstractHelperItem[] abstractHelperItem, JTable jTable) {
+     public TypeTerrainHelper(AbstractHelperItem[] abstractHelperItem, JTable jTable) {
         super(titres, jTable);
     }
 
-    public AnnonceTerrainHelper( JTable jTable) {
+    public TypeTerrainHelper( JTable jTable) {
         super(titres, jTable);
     }
     

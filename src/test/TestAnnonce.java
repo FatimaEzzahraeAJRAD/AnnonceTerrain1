@@ -16,7 +16,7 @@ public class TestAnnonce {
      public static void main(String[] args) {
          AnnonceTerrainService as = new AnnonceTerrainService();
         
-        as.creeAnnonce("EE3", 500);
+      //  as.creeAnnonce("EE3", 500);
         
      }
 }

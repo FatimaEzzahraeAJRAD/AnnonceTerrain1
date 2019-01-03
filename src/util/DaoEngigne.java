@@ -121,7 +121,7 @@ public class DaoEngigne {
 
             System.out.println(" haaa file ==> " + myFile);
             System.out.println(constructDaoCreateTableRequette(myClass));
-            //  ConnectDB.exec(constructDaoCreateTableRequette(myClass));
+        //    ConnectDB.exec(constructDaoCreateTableRequette(myClass));
         }
 
     }
@@ -165,7 +165,7 @@ public class DaoEngigne {
         for (int i = 0; i < getters.size(); i++) {
             Method method = getters.get(i);
             if (method.getName().toLowerCase().equals(("get" + paramName).toLowerCase())) {
-
+                
                 return lunchGetter(obj, method);
             }
 

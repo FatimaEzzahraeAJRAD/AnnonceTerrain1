@@ -9,6 +9,7 @@ import bean.AnnonceTerrain;
 import bean.PhotoTerrain;
 import bean.Quartier;
 import bean.TypeTerrain;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,17 +23,13 @@ public class AnnonceTerrainService  extends AbstractFacade<AnnonceTerrain>{
     }
     PhotoTerrainService photoTerrainService = new PhotoTerrainService();
     
-//    private void intDB(){
-//        for (int i = 0; i < 10; i++) {
-//            creeAnnonce("EE"+i, 2*i);
-//        }
-//        
-//    }
-    
-     public AnnonceTerrain creeAnnonce(String idAnnonce, double surface) {
+     public AnnonceTerrain creeAnnonce(String refAnnonce, double surface,double prix, Quartier quartier ,TypeTerrain typeTerrain ) {
         AnnonceTerrain at = new AnnonceTerrain();
-        at.setIdAnnonce(idAnnonce);
+        at.setRefAnnonce(refAnnonce);
         at.setSurface(surface);
+        at.setPrix(prix);
+        at.setQuartier(quartier);
+        at.setTypeTerrain(typeTerrain);
         at.setCloture(true);
         create(at);
         return at;
@@ -48,45 +45,51 @@ public class AnnonceTerrainService  extends AbstractFacade<AnnonceTerrain>{
         }
     }
     
-     public void saveAnnonce(AnnonceTerrain annonceTerrain, List<PhotoTerrain> PhotoTerrains){ // crée une Annonce et ces photos
-         create(annonceTerrain);
-         for (PhotoTerrain photoTerrain : PhotoTerrains)        
- {
-             photoTerrain.setAnnonceTerrain(annonceTerrain);
-             create(annonceTerrain);
-             photoTerrainService.create(photoTerrain);
-         }
-     }
-     
-      public List<AnnonceTerrain> searchByCreteria(String idAnnonce, Double surface, long idQuartier , long idType){
-        String query =constructQuery( idAnnonce,  surface,  idQuartier ,  idType);
+      public List<AnnonceTerrain> searchByCreteria( Double surfaceMin,Double surfaceMax, Quartier quartier ,TypeTerrain typeTerrain){
+        String query =constructQuery( surfaceMin,surfaceMax, quartier, typeTerrain);
         return getEntityManager().createQuery(query).getResultList();
     }
       
-    private String constructQuery(String idAnnonce, Double surface,  long idQuartier , long idType){
-        String query = "SELECT c FROM Compte c WHERE 1=1";
-        if(idAnnonce != null && !idAnnonce.equals("")){
-            query += " AND c.rib = '"+idAnnonce+"'";
-            return query ;
-        }
-        if(surface!= null&& !surface.toString().equals("")){
-            query += " AND c.solde >= '"+surface+"'";
+    private String constructQuery( Double surfaceMin,Double surfaceMax,  Quartier quartier ,TypeTerrain typeTerrain){
+        String query = "SELECT a FROM AnnonceTerrain a WHERE 1=1";
+//        if(surface!= null){
+//            query += " AND a.surface = '"+surface+"'";
+//              return query;
+//        }
+        
+        if(surfaceMin!= null){
+            query += " AND a.surface >= '"+surfaceMin+"'";
         }
         
-        if(idQuartier!= null && !idQuartier.toString().equals("")){
-            query += " AND c.solde <= '"+idQuartier+"'";
+        if(surfaceMax!= null && !surfaceMax.toString().equals("")){
+            query += " AND a.surface <= '"+surfaceMax+"'";
         }
-        if(idType!= null && !idType.toString().equals("")){
-            query += " AND c.solde <= '"+idType+"'";
+        if(quartier!= null && quartier.getIdQuartier()!=null){
+            query += " AND a.quartier.idQuartier = '"+quartier.getIdQuartier()+"'";
         }
-        return query;
-        
-        
+        if(typeTerrain!= null && typeTerrain.getIdType()!=null){
+            query += " AND a.typeTerrain.idType = '"+typeTerrain.getIdType()+"'";
+        }
+        System.out.println(query);
+        return query;   
     }
     
-    public void deleteByIdAnnonce(String idAnnonce){       //suprimer l'annonce et ces photos
-         photoTerrainService.deleteByIdAnnonce(idAnnonce);
-         remove (new AnnonceTerrain( idAnnonce ));
+    public int deleteByRefAnnonce(String refAnnonce){       //suprimer l'annonce 
+         remove (new AnnonceTerrain(refAnnonce ));
+         return 1;
      }
-    
+      public List<AnnonceTerrain> findByIdQuartier(long idQuartier) { // trouver les annonce associe a un Quartier 
+        String query = "SELECT a FROM AnnonceTerrain a where a.quartier.idQuartier='" +idQuartier + "' ";
+        return getEntityManager().createQuery(query).getResultList();
+    } 
+      
+       public List<AnnonceTerrain> findByIdType(long idType) { // trouver les annonce associe a un type de terrain 
+        String query = "SELECT a FROM AnnonceTerrain a where a.typeTerrain.idType='" +idType + "' ";
+        //return getEntityManager().createQuery(query).getResultList();
+        return getMultipleResult(query);
+    } 
+       public int ModifierAnnonce(String refAnnonce, double  surface, double prix, Quartier quartier, TypeTerrain typeTerrain){
+          String query="UPDATE AnnonceTerrain SET surface='"+surface+"' , prix='"+prix+"' , quartier.getIdQuartier()='"+quartier.getIdQuartier()+"' , typeTerrain.getIdType()='"+typeTerrain.getIdType()+"' WHERE refAnnonce='"+refAnnonce+"'";
+           return getEntityManager().createQuery(query).executeUpdate();
+       }
 }

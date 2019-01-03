@@ -4,9 +4,9 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>bean.AnnonceTerrain</class>
     <class>bean.PhotoTerrain</class>
-    <class>bean.User</class>
     <class>bean.Quartier</class>
     <class>bean.TypeTerrain</class>
+    <class>bean.User</class>
     <class>bean.Ville</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/AnnonceTerrain?zeroDateTimeBehavior=convertToNull"/>

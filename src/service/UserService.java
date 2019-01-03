@@ -13,32 +13,21 @@ import bean.User;
  */
 public class UserService extends AbstractFacade<User>{
     
-    public UserService(Class<User> entityClass) {
+    public UserService() {
         super(User.class);
     }
 
    
       public int seConnecter(String login, String password) {
         User user = find(login);
-        if (user == null) {
-            return -1;
-        } else if (user.isBloque()==true) {
-            return -2;
-        } else {
-            if (!user.getPassword().equals(password)) {
-                if (user.getNombreCnxRestant() > 0) {
-                    user.setNombreCnxRestant(user.getNombreCnxRestant() - 1);
-                    edit(user);
-                    if (user.getNombreCnxRestant() == 0) {
-                        user.setBloque(true);
-                        edit(user);
-                        return -3;
-                    }
-                }
-                return -4;
-            } else {
-                return 1;
-            }
-        }
-      }           
+             if (user == null) {
+                    return -1;
+              } 
+               else if (user.isBloque()==true) {
+                   return -2;
+                } 
+               else {
+                    return 1;
+                }    
+        }         
 }

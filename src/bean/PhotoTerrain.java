@@ -7,6 +7,8 @@ package bean;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -20,7 +22,8 @@ public class PhotoTerrain implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    private String id;
+   @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String  cheminPhoto ;
   
     @ManyToOne
@@ -29,10 +32,9 @@ public class PhotoTerrain implements Serializable {
     public PhotoTerrain() {
     }
 
-    public PhotoTerrain(String id, String cheminPhoto, String rib) {
+    public PhotoTerrain(Long id, String cheminPhoto) {
         this.id = id;
         this.cheminPhoto = cheminPhoto;
-        this.annonceTerrain = annonceTerrain;
     }
 
     public String getCheminPhoto() {
@@ -54,11 +56,11 @@ public class PhotoTerrain implements Serializable {
     
     
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

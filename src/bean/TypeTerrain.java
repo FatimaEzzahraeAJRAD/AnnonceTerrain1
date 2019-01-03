@@ -25,7 +25,7 @@ public class TypeTerrain implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idType;
     private String libbele;
-    @OneToMany(mappedBy = "type")
+    @OneToMany(mappedBy = "typeTerrain")
     private List<AnnonceTerrain> annonceTerrains;
 
     public TypeTerrain(Long idType, String libbele) {
