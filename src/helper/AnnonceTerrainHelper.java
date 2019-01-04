@@ -24,6 +24,7 @@ public class AnnonceTerrainHelper extends AbstractHelper<AnnonceTerrain> {
             
             new AbstractHelperItem("REFANNONCE  ", "refAnnonce"),
             new AbstractHelperItem("SURFACE", "surface"),
+            new AbstractHelperItem("PRIX", "prix"),
            new AbstractHelperItem("QUARTIER", "quartier"),
             new AbstractHelperItem("TYPETERRAIN", "typeTerrain")};
             

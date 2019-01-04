@@ -30,7 +30,7 @@ public class AnnonceTerrain implements Serializable {
     //private  Date date;
     private double prixDeVente ;
     @ManyToOne
-    private  Quartier  quartier;
+    public  Quartier  quartier;
     @ManyToOne
     private  TypeTerrain typeTerrain;
     @ManyToOne
